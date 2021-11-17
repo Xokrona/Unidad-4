@@ -1,0 +1,16 @@
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.exe
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.deps.json
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.runtimeconfig.json
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.runtimeconfig.dev.json
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.dll
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\ref\Generador.dll
+C:\Users\Christian\Desktop\project\Generador\bin\Debug\net5.0\Generador.pdb
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.csprojAssemblyReference.cache
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.AssemblyInfoInputs.cache
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.AssemblyInfo.cs
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.csproj.CoreCompileInputs.cache
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.dll
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\ref\Generador.dll
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.pdb
+C:\Users\Christian\Desktop\project\Generador\obj\Debug\net5.0\Generador.genruntimeconfig.cache
