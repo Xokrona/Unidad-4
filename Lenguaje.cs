@@ -2,37 +2,44 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 /*
-    Requerimiento 1: Agregar comentarios de linea y multilinea a nivel lexico
-    Requerimiento 2: El proyecto se debne de llamar igual que el lenguaje
-    Requerimiento 3: Indentar el codigo generado tip: Escribe (int numeroTabs, string instruccion)
-    Requerimiento 4: En la cerradura epsilon considerar getClasificacion y getContenido
-    Requerimiento 5: Implementar el operador OR
+    Requerimiento 1: Agregar comentarios de linea y multilinea a nivel lexico ☭
+    Requerimiento 2: El proyecto se debe de llamar igual que el lenguaje ☭
+    Requerimiento 3: Indentar el codigo generado tip: Escribe (int numeroTabs, string instruccion) 
+    Requerimiento 4: En la cerradura epsilon considerar getClasificacion y getContenido ☭
+    Requerimiento 5: Implementar el operador OR 
     Lenguaje -> lenguaje:identificador; ListaProducciones
     ListaProducciones -> snt flechita ListaSimbolos finProduccion 
     ListaSimbolos -> snt | st ListaSimbolos?
 */
 namespace Generador
 {
-    public class Lenguaje:Sintaxis
+    public class Lenguaje : Sintaxis
     {
+        string namesp;
+        int numeroTabs;
         public Lenguaje()
         {
+            numeroTabs=0;
             Console.WriteLine("Iniciando analisis gramatical.");
         }
         public Lenguaje(string nombre) : base(nombre)
         {
+            numeroTabs=0;
             Console.WriteLine("Iniciando analisis gramatical.");
         }
         //Lenguaje -> lenguaje:identificador; ListaProducciones
-        public void gramatica(){
+        public void gramatica()
+        {
             match("lenguaje");
             match(":");
-            if (getClasificacion()==Clasificaciones.snt)
+            if (getClasificacion() == Clasificaciones.snt)
             {
+                namesp=getContenido();
                 match(Clasificaciones.snt);
             }
             else
             {
+                namesp=getContenido();
                 match(Clasificaciones.st);
             }
             match(";");
@@ -46,14 +53,14 @@ namespace Generador
         //ListaProducciones -> snt flechita ListaSimbolos finProduccion ListaProducciones?
         private void ListaProducciones()
         {
-            lenguaje.WriteLine("        public void "+getContenido()+"()");
+            lenguaje.WriteLine("        public void " + getContenido() + "()");
             match(Clasificaciones.snt);
             match(Clasificaciones.flechita);
             lenguaje.WriteLine("        {");
             ListaSimbolos();
             lenguaje.WriteLine("        }");
             match(Clasificaciones.finProduccion);
-            if(getClasificacion()==Clasificaciones.snt)
+            if (getClasificacion() == Clasificaciones.snt)
             {
                 ListaProducciones();
             }
@@ -61,67 +68,74 @@ namespace Generador
         //ListaSimbolos -> snt | st ListaSimbolos?
         private void ListaSimbolos()
         {
-            if (getClasificacion()==Clasificaciones.snt)
+            if (getClasificacion() == Clasificaciones.snt)
             {
-                lenguaje.WriteLine("            "+getContenido()+"();");
+                lenguaje.WriteLine("            " + getContenido() + "();");
                 match(Clasificaciones.snt);
             }
-            else if (getClasificacion()==Clasificaciones.st)
+            else if (getClasificacion() == Clasificaciones.st)
             {
-                if(esClasificacion(getContenido()))
+                if (esClasificacion(getContenido()))
                 {
-                    lenguaje.WriteLine("            "+"match(clasificaciones."+getContenido() +");");
+                    lenguaje.WriteLine("            " + "match(clasificaciones." + getContenido() + ");");
                 }
                 else
                 {
-                    lenguaje.WriteLine("            "+"match(\""+getContenido() +"\");");
+                    lenguaje.WriteLine("            " + "match(\"" + getContenido() + "\");");
                 }
                 match(Clasificaciones.st);
             }
-            else if(getClasificacion()==Clasificaciones.parentesisIzquierdo)
+            else if (getClasificacion() == Clasificaciones.parentesisIzquierdo)
             {
                 match(Clasificaciones.parentesisIzquierdo);
-                lenguaje.WriteLine("            "+"if(getContenido() == \""+getContenido() +"\")");
-                lenguaje.WriteLine("            "+"{");
                 if(esClasificacion(getContenido()))
                 {
-                    lenguaje.WriteLine("            "+"match(clasificaciones."+getContenido() +");");
+                    lenguaje.WriteLine("            " + "if(getClasificacion() == clasificaciones." + getContenido() + ")");
+                }
+                else{
+                    lenguaje.WriteLine("            " + "if(getContenido() == \"" + getContenido() + "\")");
+                }
+                
+                lenguaje.WriteLine("            " + "{");
+                if (esClasificacion(getContenido()))
+                {
+                    lenguaje.WriteLine("            " + "match(clasificaciones." + getContenido() + ");");
                 }
                 else
                 {
-                    lenguaje.WriteLine("            "+"match(\""+getContenido() +"\");");
+                    lenguaje.WriteLine("            " + "match(\"" + getContenido() + "\");");
                 }
                 match(Clasificaciones.st);
-                if(getClasificacion()==Clasificaciones.snt||getClasificacion()==Clasificaciones.st)
+                if (getClasificacion() == Clasificaciones.snt || getClasificacion() == Clasificaciones.st)
                 {
                     ListaSimbolos();
                 }
                 match(Clasificaciones.parentesisDerecho);
-                lenguaje.WriteLine("            "+"}");
+                lenguaje.WriteLine("            " + "}");
                 match(Clasificaciones.cerraduraEpsilon);
             }
-            else if(getClasificacion()==Clasificaciones.corcheteIzquierdo)
+            else if (getClasificacion() == Clasificaciones.corcheteIzquierdo)
             {
                 match(Clasificaciones.corcheteIzquierdo);
-                lenguaje.WriteLine("            "+"if(getContenido() == \""+getContenido() +"\")");
-                lenguaje.WriteLine("            "+"{");
-                if(esClasificacion(getContenido()))
+                lenguaje.WriteLine("            " + "if(getContenido() == \"" + getContenido() + "\")");
+                lenguaje.WriteLine("            " + "{");
+                if (esClasificacion(getContenido()))
                 {
-                    lenguaje.WriteLine("            "+"match(clasificaciones."+getContenido() +");");
+                    lenguaje.WriteLine("            " + "match(clasificaciones." + getContenido() + ");");
                 }
                 else
                 {
-                    lenguaje.WriteLine("            "+"match(\""+getContenido() +"\");");
+                    lenguaje.WriteLine("            " + "match(\"" + getContenido() + "\");");
                 }
                 match(Clasificaciones.st);
-                if(getClasificacion()==Clasificaciones.snt||getClasificacion()==Clasificaciones.st)
+                if (getClasificacion() == Clasificaciones.snt || getClasificacion() == Clasificaciones.st)
                 {
                     ListaORs();
                 }
                 match(Clasificaciones.corcheteDerecho);
-                lenguaje.WriteLine("            "+"}");
+                lenguaje.WriteLine("            " + "}");
             }
-            if(getClasificacion()==Clasificaciones.snt||getClasificacion()==Clasificaciones.st||getClasificacion()==Clasificaciones.parentesisIzquierdo)
+            if (getClasificacion() == Clasificaciones.snt || getClasificacion() == Clasificaciones.st || getClasificacion() == Clasificaciones.parentesisIzquierdo)
             {
                 ListaSimbolos();
             }
@@ -136,19 +150,31 @@ namespace Generador
             lenguaje.WriteLine("using System;");
             lenguaje.WriteLine("using System.Collections.Generic;");
             lenguaje.WriteLine("using System.Text;");
-            lenguaje.WriteLine("namespace Generador");
+            lenguaje.WriteLine("namespace "+namesp);
             lenguaje.WriteLine("{");
+            numeroTabs++;
             lenguaje.WriteLine("    public class Lenguaje:Sintaxis");
             lenguaje.WriteLine("    {");
+            numeroTabs++;
             lenguaje.WriteLine("        public Lenguaje()");
             lenguaje.WriteLine("        {");
+            numeroTabs++;
             lenguaje.WriteLine("            Console.WriteLine(\"Iniciando analisis gramatical.\");");
             lenguaje.WriteLine("        }");
+            numeroTabs--;
             lenguaje.WriteLine("        public Lenguaje(string nombre) : base(nombre)");
             lenguaje.WriteLine("        {");
+            numeroTabs++;
             lenguaje.WriteLine("            Console.WriteLine(\"Iniciando analisis gramatical.\");");
             lenguaje.WriteLine("        }");
-            
+            numeroTabs--;
+        }
+        private void Escribir(int tabs, string contenido){
+            for(int i=tabs;i>0;i--)
+            {
+                lenguaje.Write("    ");
+            }
+            lenguaje.WriteLine(contenido);
         }
     }
 }

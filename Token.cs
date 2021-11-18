@@ -2,10 +2,10 @@ namespace Generador
 {
     public class Token : Error
     {
-      public enum Clasificaciones
+        public enum Clasificaciones
         {
-            snt, st, flechita, finProduccion, cerraduraEpsilon, 
-            parentesisIzquierdo, parentesisDerecho, or, 
+            snt, st, flechita, finProduccion, cerraduraEpsilon,
+            parentesisIzquierdo, parentesisDerecho, or,
             corcheteIzquierdo, corcheteDerecho
             //snt->L+
             //st->L+ | clasificaciones.tipo | caracter
@@ -19,8 +19,10 @@ namespace Generador
         }
         private string Contenido;
         private Clasificaciones Clasificacion;
-        protected bool esClasificacion(string clasificacion){
-            switch(clasificacion){
+        protected bool esClasificacion(string clasificacion)
+        {
+            switch (clasificacion)
+            {
                 case "identificador":
                 case "numero":
                 case "asignacion":

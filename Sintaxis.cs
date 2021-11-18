@@ -28,7 +28,7 @@ namespace Generador
             else
             {
                 bitacora.WriteLine("Error de Sintaxis: Se espera un " + espera + ". En la linea: " + linea + " caracter: " + caracter);
-                throw new Exception("Error de Sintaxis: Se espera un " + espera+ ". En la linea: " + linea + " caracter: " + caracter);
+                throw new Exception("Error de Sintaxis: Se espera un " + espera + ". En la linea: " + linea + " caracter: " + caracter);
             }
         }
         protected void match(Clasificaciones espera)

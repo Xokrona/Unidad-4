@@ -19,7 +19,7 @@ namespace Generador
             }
             catch (Error e)
             {
-                Console.WriteLine( e.Message);
+                Console.WriteLine(e.Message);
 
             }
             catch (Exception e)
