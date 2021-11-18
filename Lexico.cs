@@ -14,22 +14,24 @@ namespace Generador
         protected int linea, caracter;
         DateTime fecha = DateTime.Now;
         int[,] TRAND ={
-           //WS, L, -, >, \, ;, ?, (, ), |,LA, *, /,EF,10
-            { 0, 1, 2,10, 4,10,10,10,10,10,10,10,11, F, 0}, //Estado 0
-            { F, 1, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 1
-            { F, F, F, 3, F, F, F, F, F, F, F, F, F, F, F}, //Estado 2
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 3
-            { F, F, F, F, F, 5, 6, 7, 8, 9, F, F, F, F, F}, //Estado 4
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 5
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 6
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 7
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 8
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 9
-            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 10
-            { F, F, F, F, F, F, F, F, F, F, F,13,12, F, F}, //Estado 11
-            {12,12,12,12,12,12,12,12,12,12,12,12,12, 0, 0}, //Estado 12 
-            {13,13,13,13,13,13,13,13,13,13,13,14,13, E,13}, //Estado 13
-            {13,13,13,13,13,13,13,13,13,13,13,14, 0, E,13}, //Estado 14
+           //WS, L, -, >, \, ;, ?, (, ), |,LA, *, /,EF,10, [, ]
+            { 0, 1, 2,10, 4,10,10,10,10,10,10,10,11, F, 0,10,10}, //Estado 0
+            { F, 1, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 1
+            { F, F, F, 3, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 2
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 3
+            { F, F, F, F, F, 5, 6, 7, 8, 9, F, F, F, F, F,15,16}, //Estado 4
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 5
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 6
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 7
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 8
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 9
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 10
+            { F, F, F, F, F, F, F, F, F, F, F,13,12, F, F, F, F}, //Estado 11
+            {12,12,12,12,12,12,12,12,12,12,12,12,12, 0, 0,12,12}, //Estado 12 
+            {13,13,13,13,13,13,13,13,13,13,13,14,13, E,13,13,13}, //Estado 13
+            {13,13,13,13,13,13,13,13,13,13,13,14, 0, E,13,13,13}, //Estado 14
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 15
+            { F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //Estado 16
         }; 
         public Lexico()
         {
@@ -216,6 +218,14 @@ namespace Generador
             {
                 return 12;
             }
+            else if (t == '[')
+            {
+                return 15;
+            }
+            else if (t == ']')
+            {
+                return 16;
+            }
             else
             {
                 return 10;
@@ -251,6 +261,12 @@ namespace Generador
                     break;
                 case 9:
                     setClasificacion(Clasificaciones.or);
+                    break;
+                case 15:
+                    setClasificacion(Clasificaciones.corcheteIzquierdo);
+                    break;
+                case 16:
+                    setClasificacion(Clasificaciones.corcheteDerecho);
                     break;
 
             }
